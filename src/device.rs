@@ -66,6 +66,9 @@ pub trait Device: Read + Write {
     /// Set the address.
     fn set_address(&mut self, value: Ipv4Addr) -> Result<()>;
 
+    /// Unset the address.
+    fn unset_address(&mut self) -> Result<()>;
+
     /// Get the destination address.
     fn destination(&self) -> Result<Ipv4Addr>;
 

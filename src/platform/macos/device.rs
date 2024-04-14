@@ -266,6 +266,22 @@ impl D for Device {
         }
     }
 
+    fn unset_address(&mut self) -> Result<()> {
+        unsafe {
+            let mut req = self.request();
+            if siocgifaddr(self.ctl.as_raw_fd(), &mut req) < 0 {
+                return Err(io::Error::last_os_error().into());
+            }
+            let addr: Ipv4Addr = SockAddr::new(&req.ifru.addr).map(Into::into);
+            let mut req = self.request();
+            req.ifru.addr = SockAddr::from(addr).into();
+            if siocdifaddr(self.ctl.as_raw_fd(), &req) < 0 {
+                return Err(io::Error::last_os_error().into());
+            }
+            Ok(())
+        }
+    }
+
     fn destination(&self) -> Result<Ipv4Addr> {
         unsafe {
             let mut req = self.request();

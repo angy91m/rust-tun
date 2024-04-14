@@ -109,6 +109,10 @@ impl D for Device {
         Ok(())
     }
 
+    fn unset_address(&mut self, value: Ipv4Addr) -> Result<()> {
+        Ok(())
+    }
+
     fn destination(&self) -> Result<Ipv4Addr> {
         Err(Error::NotImplemented)
     }

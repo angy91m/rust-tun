@@ -21,6 +21,7 @@ ioctl!(bad read siocgifflags with 0x8913; ifreq);
 ioctl!(bad write siocsifflags with 0x8914; ifreq);
 ioctl!(bad read siocgifaddr with 0x8915; ifreq);
 ioctl!(bad write siocsifaddr with 0x8916; ifreq);
+ioctl!(bad write siocdifaddr with 0x8936; ifreq);
 ioctl!(bad read siocgifdstaddr with 0x8917; ifreq);
 ioctl!(bad write siocsifdstaddr with 0x8918; ifreq);
 ioctl!(bad read siocgifbrdaddr with 0x8919; ifreq);

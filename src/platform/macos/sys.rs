@@ -116,6 +116,7 @@ ioctl!(readwrite siocgifflags with 'i', 17; ifreq);
 
 ioctl!(write siocsifaddr with 'i', 12; ifreq);
 ioctl!(readwrite siocgifaddr with 'i', 33; ifreq);
+ioctl!(write siocdifaddr with 'i', 25; ifreq);
 
 ioctl!(write siocsifdstaddr with 'i', 14; ifreq);
 ioctl!(readwrite siocgifdstaddr with 'i', 34; ifreq);

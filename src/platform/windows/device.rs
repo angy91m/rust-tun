@@ -20,7 +20,7 @@ use std::task::{Context, Poll};
 use std::thread;
 use std::vec::Vec;
 
-use wintun::Session;
+use wintun::{Session,run_command};
 
 use crate::configuration::Configuration;
 use crate::device::Device as D;
@@ -127,6 +127,24 @@ impl D for Device {
 
     fn set_address(&mut self, value: Ipv4Addr) -> Result<()> {
         self.queue.session.get_adapter().set_address(value)?;
+        Ok(())
+    }
+
+    fn unset_address(&mut self) -> Result<()> {
+        let args = &[
+            "interface",
+            "ipv4",
+            "set",
+            "address",
+            &format!("name=\"{}\"", self.name()?),
+            ("source=dhcp"),
+        ];
+        run_command("netsh", args)?;
+        let args = &[
+            "/renew",
+            &format!("\"{}\"", self.name()?)
+        ];
+        run_command("ipconfig", args)?;
         Ok(())
     }
 
